@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { Code, Palette, Brain, Zap, ArrowRight } from "lucide-react";
 
 const services = [
@@ -31,23 +32,68 @@ const services = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.4, 0, 0.2, 1] as const,
+    },
+  },
+};
+
 const ServicesSection = () => {
   return (
     <section id="services" className="py-16 bg-muted/50">
       <div className="container mx-auto px-4">
-        <h2 className="section-title text-center">My Services</h2>
+        <motion.h2 
+          className="section-title text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5 }}
+        >
+          My Services
+        </motion.h2>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service, index) => (
-            <div
+        <motion.div 
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          {services.map((service) => (
+            <motion.div
               key={service.title}
               className="service-card flex flex-col"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              variants={cardVariants}
+              whileHover={{ 
+                y: -8,
+                boxShadow: "0 20px 40px -15px rgba(0,0,0,0.2)"
+              }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
               {/* Icon */}
-              <div className={`w-12 h-12 rounded-lg ${service.color} flex items-center justify-center mb-4`}>
+              <motion.div 
+                className={`w-12 h-12 rounded-lg ${service.color} flex items-center justify-center mb-4`}
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
                 <service.icon className="w-6 h-6 text-white" />
-              </div>
+              </motion.div>
               
               {/* Title */}
               <h3 className="font-heading font-semibold text-lg text-foreground mb-2">
@@ -60,16 +106,18 @@ const ServicesSection = () => {
               </p>
               
               {/* CTA */}
-              <a
+              <motion.a
                 href="#contact"
-                className="inline-flex items-center gap-2 text-accent font-semibold text-sm hover:gap-3 transition-all"
+                className="inline-flex items-center gap-2 text-accent font-semibold text-sm"
+                whileHover={{ x: 5 }}
+                transition={{ type: "spring", stiffness: 400 }}
               >
                 {service.cta}
                 <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import profilePhoto from "@/assets/profile-photo.png";
 
 const techLogos = [
@@ -38,9 +39,14 @@ const TechIcon = ({ name, color, iconKey }: { name: string; color: string; iconK
   };
 
   return (
-    <div className="tech-badge" title={name}>
+    <motion.div 
+      className="tech-badge" 
+      title={name}
+      whileHover={{ scale: 1.1, y: -2 }}
+      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+    >
       {icons[iconKey]}
-    </div>
+    </motion.div>
   );
 };
 
@@ -50,40 +56,97 @@ const HeroSection = () => {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           {/* Left Content */}
-          <div className="order-2 md:order-1 animate-fade-in">
-            <p className="text-muted-foreground mb-2 font-medium">Anjan Prajapati</p>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4 leading-tight">
+          <motion.div 
+            className="order-2 md:order-1"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <motion.p 
+              className="text-muted-foreground mb-2 font-medium"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              Anjan Prajapati
+            </motion.p>
+            <motion.h1 
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4 leading-tight"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
               Turning Ideas Into Scalable<br />
               <span className="text-foreground">Digital Products</span>
-            </h1>
-            <p className="text-muted-foreground mb-8 text-lg">
+            </motion.h1>
+            <motion.p 
+              className="text-muted-foreground mb-8 text-lg"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
               I design and develop modern web applications that perform and impress.
-            </p>
+            </motion.p>
             
             {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4 mb-10">
-              <a href="#projects" className="btn-primary inline-flex items-center gap-2">
+            <motion.div 
+              className="flex flex-wrap gap-4 mb-10"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              <motion.a 
+                href="#projects" 
+                className="btn-primary inline-flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 View Portfolio
-              </a>
-              <a href="#contact" className="btn-outline inline-flex items-center gap-2">
+              </motion.a>
+              <motion.a 
+                href="#contact" 
+                className="btn-outline inline-flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 Hire Me
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
 
             {/* Technologies */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+            >
               <p className="text-sm text-muted-foreground mb-4">Technologies I Work With</p>
               <div className="flex gap-3">
-                {techLogos.map((tech) => (
-                  <TechIcon key={tech.name} name={tech.name} color={tech.color} iconKey={tech.icon} />
+                {techLogos.map((tech, index) => (
+                  <motion.div
+                    key={tech.name}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.7 + index * 0.1, type: "spring" }}
+                  >
+                    <TechIcon name={tech.name} color={tech.color} iconKey={tech.icon} />
+                  </motion.div>
                 ))}
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Right Content - Profile Image */}
-          <div className="order-1 md:order-2 flex justify-center md:justify-end">
-            <div className="relative">
+          <motion.div 
+            className="order-1 md:order-2 flex justify-center md:justify-end"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <motion.div 
+              className="relative"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
               <div className="w-64 h-72 md:w-80 md:h-96 rounded-2xl overflow-hidden shadow-2xl">
                 <img
                   src={profilePhoto}
@@ -92,10 +155,32 @@ const HeroSection = () => {
                 />
               </div>
               {/* Decorative elements */}
-              <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-accent/20 rounded-xl -z-10"></div>
-              <div className="absolute -top-4 -left-4 w-16 h-16 bg-primary/10 rounded-xl -z-10"></div>
-            </div>
-          </div>
+              <motion.div 
+                className="absolute -bottom-4 -right-4 w-20 h-20 bg-accent/20 rounded-xl -z-10"
+                animate={{ 
+                  y: [0, -8, 0],
+                  rotate: [0, 5, 0]
+                }}
+                transition={{ 
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+              <motion.div 
+                className="absolute -top-4 -left-4 w-16 h-16 bg-primary/10 rounded-xl -z-10"
+                animate={{ 
+                  y: [0, 8, 0],
+                  rotate: [0, -5, 0]
+                }}
+                transition={{ 
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>
