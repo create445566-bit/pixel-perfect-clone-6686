@@ -132,9 +132,10 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
+              className="bg-secondary/60 rounded-2xl px-6 py-5 inline-block"
             >
-              <p className="text-sm text-muted-foreground mb-4">Technologies I Work With</p>
-              <div className="flex gap-3">
+              <p className="text-sm font-semibold text-foreground mb-4 tracking-wide uppercase">Tech Stack</p>
+              <div className="flex flex-wrap gap-5">
                 {techLogos.map((tech, index) => (
                   <motion.div
                     key={tech.name}
