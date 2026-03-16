@@ -2,22 +2,15 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Mail, MapPin, Phone, Send } from "lucide-react";
-
-const contactInfo = [
-  { icon: Mail, label: "Email", value: "contact@anjanprajapati.com", href: "mailto:contact@anjanprajapati.com" },
-  { icon: Phone, label: "Phone", value: "+91 98765 43210", href: "tel:+919876543210" },
-  { icon: MapPin, label: "Location", value: "India", href: "#" },
-];
+import { Mail, Phone, MapPin, ChevronRight } from "lucide-react";
 
 const Contact = () => {
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Placeholder - would integrate with backend
     alert("Thank you for your message! I'll get back to you soon.");
-    setForm({ name: "", email: "", subject: "", message: "" });
+    setForm({ name: "", email: "", message: "" });
   };
 
   return (
@@ -31,104 +24,93 @@ const Contact = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">Contact Me</h1>
-            <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-              Have a project in mind or just want to say hello? Let's connect!
+            <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Contact me</h1>
+            <p className="text-muted-foreground text-base max-w-xl mx-auto leading-relaxed">
+              Feel free to reach out for any inquiries or just to say hello.
+              <br />
+              I'm available through email, phone, or my location below.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-5 gap-10 max-w-5xl mx-auto">
-            {/* Contact Info */}
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto items-start">
+            {/* Left - Contact Info Cards */}
             <motion.div
-              className="md:col-span-2 space-y-6"
+              className="space-y-4"
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <h2 className="text-xl font-heading font-semibold text-foreground mb-4">Get in Touch</h2>
-              {contactInfo.map((info) => (
+              {[
+                { icon: Mail, text: "anjanprajapati@gmail.com", href: "mailto:anjanprajapati@gmail.com", color: "text-orange-500" },
+                { icon: Phone, text: "+91 70455 69845", href: "tel:+917045569845", color: "text-emerald-500" },
+                { icon: MapPin, text: "Mumbai, India", href: "#", color: "text-blue-600" },
+              ].map((item, i) => (
                 <motion.a
-                  key={info.label}
-                  href={info.href}
-                  className="flex items-start gap-4 group"
-                  whileHover={{ x: 4 }}
+                  key={i}
+                  href={item.href}
+                  className="flex items-center gap-4 p-5 rounded-xl bg-card shadow-sm border border-border/50 hover:shadow-md transition-shadow"
+                  whileHover={{ y: -2 }}
                 >
-                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
-                    <info.icon className="w-5 h-5 text-accent" />
+                  <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center shrink-0">
+                    <item.icon className={`w-5 h-5 ${item.color}`} />
                   </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">{info.label}</p>
-                    <p className="text-foreground font-medium group-hover:text-accent transition-colors">
-                      {info.value}
-                    </p>
-                  </div>
+                  <span className="text-foreground font-medium text-sm md:text-base">{item.text}</span>
                 </motion.a>
               ))}
             </motion.div>
 
-            {/* Contact Form */}
+            {/* Right - Contact Form */}
             <motion.form
               onSubmit={handleSubmit}
-              className="md:col-span-3 service-card"
+              className="rounded-xl bg-card shadow-sm border border-border/50 p-6 space-y-5"
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <div className="grid sm:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label className="text-sm font-medium text-foreground mb-1 block">Name</label>
-                  <input
-                    type="text"
-                    required
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 transition"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div>
-                  <label className="text-sm font-medium text-foreground mb-1 block">Email</label>
-                  <input
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 transition"
-                    placeholder="you@email.com"
-                  />
-                </div>
-              </div>
-              <div className="mb-4">
-                <label className="text-sm font-medium text-foreground mb-1 block">Subject</label>
+              <div>
+                <label className="text-sm font-medium text-foreground mb-1.5 block">Name</label>
                 <input
                   type="text"
                   required
-                  value={form.subject}
-                  onChange={(e) => setForm({ ...form, subject: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 transition"
-                  placeholder="Project inquiry"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 transition"
+                  placeholder="Name"
                 />
               </div>
-              <div className="mb-6">
-                <label className="text-sm font-medium text-foreground mb-1 block">Message</label>
+              <div>
+                <label className="text-sm font-medium text-foreground mb-1.5 block">Email</label>
+                <input
+                  type="email"
+                  required
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 transition"
+                  placeholder="Email"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-foreground mb-1.5 block">Message</label>
                 <textarea
                   required
-                  rows={5}
+                  rows={4}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 transition resize-none"
-                  placeholder="Tell me about your project..."
+                  className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 transition resize-none"
+                  placeholder=""
                 />
               </div>
-              <motion.button
-                type="submit"
-                className="btn-primary inline-flex items-center gap-2"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                <Send className="w-4 h-4" />
-                Send Message
-              </motion.button>
+              <div className="flex justify-end">
+                <motion.button
+                  type="submit"
+                  className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full bg-primary text-primary-foreground font-medium text-sm hover:bg-primary/90 transition-colors"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  Send Message
+                  <ChevronRight className="w-4 h-4" />
+                </motion.button>
+              </div>
             </motion.form>
           </div>
         </div>
