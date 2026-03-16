@@ -137,7 +137,7 @@ const HeroSection = () => {
               transition={{ delay: 0.6 }}
             >
               <p className="text-sm text-muted-foreground mb-4">Technologies I Work With</p>
-              <div className="flex gap-3">
+              <div className="flex flex-wrap gap-4 md:gap-6">
                 {techLogos.map((tech, index) => (
                   <motion.div
                     key={tech.name}
