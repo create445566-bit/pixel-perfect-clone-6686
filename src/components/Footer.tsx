@@ -51,7 +51,11 @@ const Footer = () => {
         </div>
       </div>
     </motion.footer>
+      <PagePagination />
+    </>
   );
+
+  return wrapper;
 };
 
 export default Footer;
