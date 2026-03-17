@@ -96,15 +96,15 @@ const HeroSection = () => {
               transition={{ delay: 0.5 }}
             >
               <motion.a 
-                href="#projects" 
+                href="/projects" 
                 className="btn-primary inline-flex items-center gap-2"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                View Portfolio
+                View Projects
               </motion.a>
               <motion.a 
-                href="#contact" 
+                href="/contact" 
                 className="btn-outline inline-flex items-center gap-2"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
