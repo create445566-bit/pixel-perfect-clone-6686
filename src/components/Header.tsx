@@ -5,10 +5,11 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { name: "Home", path: "/" },
-  { name: "About Me", path: "/about" },
+  { name: "About", path: "/about" },
+  { name: "Projects", path: "/projects" },
   { name: "Social Media", path: "/social" },
   { name: "Thoughts", path: "/thoughts" },
-  { name: "Contact Me", path: "/contact" },
+  { name: "Contact", path: "/contact" },
 ];
 
 const Header = () => {
