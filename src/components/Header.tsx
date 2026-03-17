@@ -50,8 +50,8 @@ const Header = () => {
                     to={link.path}
                     className={`text-sm font-medium transition-colors duration-200 ${
                       isActive
-                        ? "text-accent border-b-2 border-accent pb-1"
-                        : "text-foreground/80 hover:text-accent"
+                        ? "text-[#6B7280] border-b-2 border-[#E5E7EB] pb-1"
+                        : "text-foreground/80 hover:text-[#9CA3AF]"
                     }`}
                   >
                     {link.name}
