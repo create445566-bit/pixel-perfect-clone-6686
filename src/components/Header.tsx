@@ -48,10 +48,10 @@ const Header = () => {
                 >
                   <Link
                     to={link.path}
-                    className={`text-sm font-medium transition-colors duration-200 ${
+                    className={`relative text-sm font-medium transition-all duration-300 pb-1 ${
                       isActive
-                        ? "text-[#6B7280] border-b-2 border-[#E5E7EB] pb-1"
-                        : "text-foreground/80 hover:text-[#9CA3AF]"
+                        ? "text-muted-foreground after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-muted-foreground/40 after:rounded-full"
+                        : "text-foreground/80 hover:text-muted-foreground after:absolute after:bottom-0 after:left-1/2 after:w-0 after:h-[2px] after:bg-muted-foreground/30 after:rounded-full after:transition-all after:duration-300 hover:after:left-0 hover:after:w-full"
                     }`}
                   >
                     {link.name}
@@ -119,8 +119,8 @@ const Header = () => {
                     >
                       <Link
                         to={link.path}
-                        className={`text-sm font-medium transition-colors duration-200 block ${
-                          isActive ? "text-[#6B7280] font-bold" : "text-foreground/80 hover:text-[#9CA3AF]"
+                        className={`text-sm font-medium transition-all duration-300 block ${
+                          isActive ? "text-muted-foreground font-bold border-l-2 border-muted-foreground/40 pl-3" : "text-foreground/80 hover:text-muted-foreground pl-3"
                         }`}
                         onClick={() => setIsMenuOpen(false)}
                       >
