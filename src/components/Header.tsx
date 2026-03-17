@@ -120,7 +120,7 @@ const Header = () => {
                       <Link
                         to={link.path}
                         className={`text-sm font-medium transition-colors duration-200 block ${
-                          isActive ? "text-accent font-bold" : "text-foreground/80 hover:text-accent"
+                          isActive ? "text-[#6B7280] font-bold" : "text-foreground/80 hover:text-[#9CA3AF]"
                         }`}
                         onClick={() => setIsMenuOpen(false)}
                       >
