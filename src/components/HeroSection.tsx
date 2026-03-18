@@ -5,7 +5,9 @@ const techLogos = [
   { name: "HTML5", color: "#E34F26", icon: "html5" },
   { name: "CSS3", color: "#1572B6", icon: "css3" },
   { name: "JavaScript", color: "#F7DF1E", icon: "js" },
-  { name: "React", color: "#61DAFB", icon: "react" },
+  { name: "Python", color: "#3776AB", icon: "python" },
+  { name: "Docker", color: "#2496ED", icon: "docker" },
+  { name: "AWS", color: "#FF9900", icon: "aws" },
   { name: "Figma", color: "#F24E1E", icon: "figma" },
 ];
 
