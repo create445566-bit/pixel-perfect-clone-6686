@@ -8,7 +8,6 @@ const techLogos = [
   { name: "Python", color: "#3776AB", icon: "python" },
   { name: "Docker", color: "#2496ED", icon: "docker" },
   { name: "AWS", color: "#FF9900", icon: "aws" },
-  { name: "Figma", color: "#F24E1E", icon: "figma" },
 ];
 
 const TechIcon = ({ name, color, iconKey }: { name: string; color: string; iconKey: string }) => {
