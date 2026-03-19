@@ -44,11 +44,6 @@ const TechIcon = ({ name, color, iconKey }: { name: string; color: string; iconK
         <path d="M21.725 16.92C19.16 18.89 15.415 19.94 12.17 19.94c-4.478 0-8.51-1.655-11.558-4.406-.24-.216-.024-.511.264-.343 3.293 1.915 7.363 3.07 11.573 3.07 2.838 0 5.957-.59 8.83-1.805.431-.191.798.28.447.463zm1.277-1.455c-.328-.42-2.167-.2-2.995-.103-.248.032-.287-.184-.064-.343 1.469-1.03 3.877-.734 4.157-.39.28.351-.072 2.771-1.453 3.929-.215.183-.415.088-.32-.152.311-.774 1.005-2.521.675-2.94z" fill="#FF9900"/>
       </svg>
     ),
-    figma: (
-      <svg viewBox="0 0 24 24" className="w-6 h-6" fill={color}>
-        <path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.098-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z"/>
-      </svg>
-    ),
   };
 
   return (
@@ -63,54 +58,54 @@ const TechIcon = ({ name, color, iconKey }: { name: string; color: string; iconK
   );
 };
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 15 },
+  visible: (delay: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay, ease: [0.4, 0, 0.2, 1] as const },
+  }),
+};
+
 const HeroSection = () => {
   return (
-    <section id="home" className="pt-24 pb-12 md:pt-32 md:pb-20">
+    <section id="home" className="pt-20 pb-10 md:pt-28 md:pb-16">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-8 items-center">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
           {/* Left Content */}
           <motion.div 
             className="order-2 md:order-1"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            initial="hidden"
+            animate="visible"
           >
             <motion.p 
-              className="text-muted-foreground mb-2 font-medium"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              className="text-muted-foreground mb-2 font-medium text-sm md:text-base"
+              variants={fadeUp} custom={0.1}
             >
               Anjan Prajapati
             </motion.p>
             <motion.h1 
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4 leading-tight"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-3 md:mb-4 leading-tight"
+              variants={fadeUp} custom={0.2}
             >
               Turning Ideas Into Scalable<br />
               <span className="text-foreground">Digital Products</span>
             </motion.h1>
             <motion.p 
-              className="text-muted-foreground mb-8 text-lg"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
+              className="text-muted-foreground mb-6 md:mb-8 text-base md:text-lg"
+              variants={fadeUp} custom={0.3}
             >
               I design and develop modern web applications that perform and impress.
             </motion.p>
             
             {/* CTA Buttons */}
             <motion.div 
-              className="flex flex-wrap gap-4 mb-10"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
+              className="flex flex-wrap gap-3 mb-8 md:mb-10"
+              variants={fadeUp} custom={0.4}
             >
               <motion.a 
                 href="/projects" 
-                className="btn-primary inline-flex items-center gap-2"
+                className="btn-primary inline-flex items-center gap-2 text-sm md:text-base px-5 py-2.5 md:px-6 md:py-3"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -118,7 +113,7 @@ const HeroSection = () => {
               </motion.a>
               <motion.a 
                 href="/contact" 
-                className="btn-outline inline-flex items-center gap-2"
+                className="btn-outline inline-flex items-center gap-2 text-sm md:text-base px-5 py-2.5 md:px-6 md:py-3"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -127,19 +122,15 @@ const HeroSection = () => {
             </motion.div>
 
             {/* Technologies */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-            >
-              <p className="text-sm text-muted-foreground mb-4">Technologies I Work With</p>
-              <div className="flex gap-3">
+            <motion.div variants={fadeUp} custom={0.5}>
+              <p className="text-xs md:text-sm text-muted-foreground mb-3">Technologies I Work With</p>
+              <div className="flex gap-2.5 md:gap-3">
                 {techLogos.map((tech, index) => (
                   <motion.div
                     key={tech.name}
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.7 + index * 0.1, type: "spring" }}
+                    transition={{ delay: 0.6 + index * 0.08, type: "spring" }}
                   >
                     <TechIcon name={tech.name} color={tech.color} iconKey={tech.icon} />
                   </motion.div>
@@ -151,46 +142,33 @@ const HeroSection = () => {
           {/* Right Content - Profile Image */}
           <motion.div 
             className="order-1 md:order-2 flex justify-center md:justify-end"
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
           >
             <motion.div 
               className="relative"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <div className="w-64 h-72 md:w-80 md:h-96 rounded-2xl overflow-hidden shadow-2xl">
+              <div className="w-56 h-64 md:w-80 md:h-96 rounded-2xl overflow-hidden shadow-2xl">
                 <img
                   src={profilePhoto}
                   alt="Anjan Prajapati - Software Developer"
                   className="w-full h-full object-cover"
+                  loading="eager"
                 />
               </div>
               {/* Decorative elements */}
               <motion.div 
-                className="absolute -bottom-4 -right-4 w-20 h-20 bg-accent/20 rounded-xl -z-10"
-                animate={{ 
-                  y: [0, -8, 0],
-                  rotate: [0, 5, 0]
-                }}
-                transition={{ 
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
+                className="absolute -bottom-3 -right-3 w-16 h-16 md:w-20 md:h-20 bg-accent/20 rounded-xl -z-10"
+                animate={{ y: [0, -6, 0], rotate: [0, 4, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               />
               <motion.div 
-                className="absolute -top-4 -left-4 w-16 h-16 bg-primary/10 rounded-xl -z-10"
-                animate={{ 
-                  y: [0, 8, 0],
-                  rotate: [0, -5, 0]
-                }}
-                transition={{ 
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
+                className="absolute -top-3 -left-3 w-12 h-12 md:w-16 md:h-16 bg-primary/10 rounded-xl -z-10"
+                animate={{ y: [0, 6, 0], rotate: [0, -4, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               />
             </motion.div>
           </motion.div>

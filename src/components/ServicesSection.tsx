@@ -32,92 +32,63 @@ const services = [
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.4, 0, 0.2, 1] as const,
-    },
-  },
-};
-
 const ServicesSection = () => {
   return (
-    <section id="services" className="py-16 bg-muted/50">
+    <section id="services" className="py-12 md:py-16 bg-muted/50">
       <div className="container mx-auto px-4">
         <motion.h2 
           className="section-title text-center"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
         >
           My Services
         </motion.h2>
         
-        <motion.div 
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          {services.map((service) => (
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          {services.map((service, index) => (
             <motion.div
               key={service.title}
-              className="service-card flex flex-col"
-              variants={cardVariants}
+              className="service-card flex flex-col p-4 md:p-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ 
-                y: -8,
-                boxShadow: "0 20px 40px -15px rgba(0,0,0,0.2)"
+                y: -6,
+                boxShadow: "0 16px 32px -12px rgba(0,0,0,0.15)"
               }}
-              transition={{ type: "spring", stiffness: 300 }}
             >
               {/* Icon */}
               <motion.div 
-                className={`w-12 h-12 rounded-lg ${service.color} flex items-center justify-center mb-4`}
+                className={`w-10 h-10 md:w-12 md:h-12 rounded-lg ${service.color} flex items-center justify-center mb-3 md:mb-4`}
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ type: "spring", stiffness: 400 }}
               >
-                <service.icon className="w-6 h-6 text-white" />
+                <service.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
               </motion.div>
               
-              {/* Title */}
-              <h3 className="font-heading font-semibold text-lg text-foreground mb-2">
+              <h3 className="font-heading font-semibold text-sm md:text-lg text-foreground mb-1.5 md:mb-2">
                 {service.title}
               </h3>
               
-              {/* Description */}
-              <p className="text-muted-foreground text-sm mb-4 flex-grow">
+              <p className="text-muted-foreground text-xs md:text-sm mb-3 md:mb-4 flex-grow">
                 {service.description}
               </p>
               
-              {/* CTA */}
               <motion.a
                 href="#contact"
-                className="inline-flex items-center gap-2 text-accent font-semibold text-sm"
-                whileHover={{ x: 5 }}
+                className="inline-flex items-center gap-1.5 text-accent font-semibold text-xs md:text-sm"
+                whileHover={{ x: 4 }}
                 transition={{ type: "spring", stiffness: 400 }}
               >
                 {service.cta}
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4" />
               </motion.a>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
