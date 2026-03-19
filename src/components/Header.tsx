@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -14,42 +14,28 @@ const navLinks = [
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Close mobile menu on route change
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [location.pathname]);
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border transition-shadow duration-300 ${
-        isScrolled ? "shadow-md" : ""
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-14 md:h-16">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <motion.div whileHover={{ scale: 1.02 }}>
             <Link to="/" className="flex items-center gap-2">
-              <span className="text-lg md:text-xl font-heading font-bold text-primary">
+              <span className="text-xl font-heading font-bold text-primary">
                 Anjan Trends<sup className="text-xs">™</sup>
               </span>
             </Link>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+          <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link, index) => {
               const isActive = location.pathname === link.path;
               return (
@@ -92,19 +78,19 @@ const Header = () => {
 
           {/* Mobile menu button */}
           <motion.button
-            className="md:hidden p-2 -mr-2"
+            className="md:hidden p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
             whileTap={{ scale: 0.9 }}
           >
             <AnimatePresence mode="wait">
               {isMenuOpen ? (
-                <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
-                  <X size={22} />
+                <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                  <X size={24} />
                 </motion.div>
               ) : (
-                <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
-                  <Menu size={22} />
+                <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                  <Menu size={24} />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -115,13 +101,13 @@ const Header = () => {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.nav
-              className="md:hidden border-t border-border overflow-hidden"
+              className="md:hidden py-4 border-t border-border overflow-hidden"
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.25, ease: "easeInOut" }}
+              transition={{ duration: 0.3 }}
             >
-              <div className="flex flex-col py-3">
+              <div className="flex flex-col gap-4">
                 {navLinks.map((link, index) => {
                   const isActive = location.pathname === link.path;
                   return (
@@ -129,14 +115,12 @@ const Header = () => {
                       key={link.name}
                       initial={{ x: -20, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
-                      transition={{ delay: index * 0.04 }}
+                      transition={{ delay: index * 0.05 }}
                     >
                       <Link
                         to={link.path}
-                        className={`text-sm font-medium transition-all duration-200 block py-3 px-4 rounded-lg active:bg-muted/80 ${
-                          isActive
-                            ? "text-accent font-semibold bg-muted/50"
-                            : "text-foreground/80 hover:text-foreground hover:bg-muted/30"
+                        className={`text-sm font-medium transition-all duration-300 block ${
+                          isActive ? "text-muted-foreground font-bold border-l-2 border-muted-foreground/40 pl-3" : "text-foreground/80 hover:text-muted-foreground pl-3"
                         }`}
                         onClick={() => setIsMenuOpen(false)}
                       >
