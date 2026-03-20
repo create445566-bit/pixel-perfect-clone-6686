@@ -12,7 +12,7 @@ const projects = [
   },
   {
     image: projectEcommerce,
-    title: "E-Commerce Platform",
+    title: "E-Commerce Website",
     subtitle: "Custom Online Store",
     link: "#",
   },
